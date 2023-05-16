@@ -42,7 +42,7 @@ jobs:
     needs: build
     environment:
       name: 'stg'
-      url: 'https://demo-app-react-stg.azurewebsites.net'
+      url: 'https://demo-app-react-staging.azurewebsites.net'
 
     steps:
       - name: Download artifact from build job
@@ -55,6 +55,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: demo-app-react
-          slot-name: stg
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11E246186F244ADCA8329B835B69E853 }}
+          slot-name: staging
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: .
