@@ -26,18 +26,15 @@ jobs:
           CI: false
         run: |
           cd .
-          pwd
+        
           npm install
           npm run build --if-present
-          pwd
-          ls
-          cd build
-          ls 
+       
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: app-demo
           path: build
 
   deploy:
@@ -51,13 +48,13 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: app-demo
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'demo-app-react'
-          slot-name: 'stg'
+          app-name: demo-app-react
+          slot-name: stg
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11E246186F244ADCA8329B835B69E853 }}
-          package: .
+          package: build
