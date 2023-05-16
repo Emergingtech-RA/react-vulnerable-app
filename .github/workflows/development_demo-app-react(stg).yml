@@ -25,8 +25,8 @@ jobs:
         env:
           CI: false
         run: |
-          cd .
-        
+          
+
           npm install
           npm run build --if-present
        
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-demo
-          path: build
+          path: build/
 
   deploy:
     runs-on: ubuntu-latest
