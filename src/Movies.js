@@ -6,8 +6,8 @@ class Movies extends Component {
   render() {
     return (
       <div>
-        <h1>The lying baby</h1>
-        <img src="img/fract13.png"></img>
+        <h1>Demo</h1>
+        <img src="img/sec.jfif"></img>
       </div>
 
     );
