@@ -52,7 +52,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'demo-app-react'
-          slot-name: 'stg'  # Deploying to the staging slot
+          slot-name: 'staging'  # Deploying to the staging slot
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11E246186F244ADCA8329B835B69E853 }}
           package: .
 
