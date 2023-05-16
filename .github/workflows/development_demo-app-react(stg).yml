@@ -40,7 +40,7 @@ jobs:
     needs: build
     environment:
       name: 'stg'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: 'https://demo-app-react-stg.azurewebsites.net'
 
     steps:
       - name: Download artifact from build job
