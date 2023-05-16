@@ -57,4 +57,4 @@ jobs:
           app-name: demo-app-react
           slot-name: stg
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11E246186F244ADCA8329B835B69E853 }}
-          package: build
+          package: ./build
