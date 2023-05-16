@@ -54,7 +54,7 @@ jobs:
           app-name: 'demo-app-react'
           slot-name: 'stg'  # Deploying to the staging slot
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11E246186F244ADCA8329B835B69E853 }}
-          package: ./build
+          package: .
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -76,4 +76,4 @@ jobs:
           app-name: 'demo-app-react'
           slot-name: 'Production'  # Deploying to the production slot
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ECACBD4D3D754F6CB84546630B51CE8D }}
-          package: ./build
+          package: .
