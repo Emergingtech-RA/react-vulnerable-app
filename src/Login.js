@@ -15,7 +15,7 @@ class Login extends Component {
     this.postLogin();
 
   }
-
+  
   postLogin(event) {
     console.log('postLogin startedd');
     const form = new FormData(document.getElementById('login-form'));
@@ -56,14 +56,19 @@ class Login extends Component {
     return (
       <form action="" id="login-form" onSubmit={this.formSubmitted}>
         <div className="form-group">
-          <label htmlFor="username">User name:admin</label>
+          <label htmlFor="username">User name</label>
+
           <input type="text" className="form-control" id="email" placeholder="Enter user name" name="username"/>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:Admin@123</label>
+          <label htmlFor="password">Password</label>
           <input type="password" className="form-control" id="pwd" placeholder="Enter password" name="password"/>
         </div>
         <button type="submit" className="btn btn-default">Submit</button>
+        <div>
+        <input type="Test Data" className="form-control" id="test" placeholder="Type here" name="testdata"/>
+        <button type="Enter" className="btn btn-default">Enter</button>
+        </div>
       </form>
 
     );

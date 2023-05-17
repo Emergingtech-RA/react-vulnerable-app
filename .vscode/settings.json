@@ -1,3 +1,7 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "sonarlint.connectedMode.project": {
+        "connectionId": "emergingtech-ra-org",
+        "projectKey": "Emergingtech-RA_react-vulnerable-app"
+    }
 }

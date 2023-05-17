@@ -5,6 +5,8 @@ import MyLink from './utils/MyLink'
 import PubSub from 'pubsub-js';
 import Constants from './Constants';
 
+
+
 class App extends Component {
 
   constructor(props) {
@@ -49,7 +51,7 @@ class App extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <Link className="navbar-brand" to="/movies">SoCinema</Link>
+              <Link className="navbar-brand" to="/movies">DevSecOps for Banks </Link>
             </div>
             <ul className="nav navbar-nav">
               <li>
@@ -85,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App

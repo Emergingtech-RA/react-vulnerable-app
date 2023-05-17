@@ -51,11 +51,11 @@ class Register extends Component {
         <form action="" id="register-form" onSubmit={this.formSubmitted}>
           <div className="form-group">
             <label htmlFor="username">User name:</label>
-            <input required="true" type="text" className="form-control" id="email" placeholder="Enter user name" name="name"/>
+            {/* <input required="true" type="text" className="form-control" id="email" placeholder="Enter user name" name="name"/> */}
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
-            <input required="true" type="password" className="form-control" id="pwd" placeholder="Enter password" name="password"/>
+            {/* <input required="true" type="password" className="form-control" id="pwd" placeholder="Enter password" name="password"/> */}
           </div>
           <div className="form-group">
             <label htmlFor="emailAddress">Mail address:</label>

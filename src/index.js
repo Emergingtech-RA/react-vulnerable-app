@@ -12,6 +12,8 @@ import Register from './Register';
 import registerServiceWorker from './registerServiceWorker';
 import { Router, Route, browserHistory, IndexRoute  } from 'react-router';
 
+
+
 ReactDOM.render((
    <Router history = {browserHistory}>
       <Route path = "/" component = {App}>
@@ -24,5 +26,5 @@ ReactDOM.render((
          <Route path = "register" component = {Register} />
       </Route>
    </Router>), document.getElementById('root'));
-// ReactDOM.render(<App />, document.getElementById('root'));
+   
 registerServiceWorker();
