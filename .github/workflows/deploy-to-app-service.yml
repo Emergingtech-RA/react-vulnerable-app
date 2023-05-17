@@ -29,6 +29,16 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:javascript"
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{matrix.language}}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
