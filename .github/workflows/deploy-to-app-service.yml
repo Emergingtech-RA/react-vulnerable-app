@@ -130,7 +130,7 @@ jobs:
         uses: azure/policy-compliance-scan@v0
         with:
           scopes: |
-            /subscriptions/c73eb8fb-fc1a-48b0-985d-a1edbc385815/resourceGroups/demo-web-app/providers/Microsoft.Web/sites/demo-app-react
+            /subscriptions/${{secrets.AZURE_SUBSCRIPTION}} /resourceGroups/demo-web-app/providers/Microsoft.Web/sites/demo-app-react
 
   deploy-prod:
     name: Deploy to Production
