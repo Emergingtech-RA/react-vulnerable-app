@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: ./
+          projectBaseDir: ./angular-code/
           args: >
             -Dsonar.organization=emergingtech-ra-org
             -Dsonar.projectKey=emergingtech-ra-org_react-app
