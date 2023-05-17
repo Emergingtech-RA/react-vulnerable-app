@@ -65,7 +65,7 @@ jobs:
 
   deploy-to-staging:
     runs-on: ubuntu-latest
-    needs: [codeql-analysis-SCA,sonarcloud-SAST]
+    needs: [build,codeql-analysis-SCA,sonarcloud-SAST]
     environment:
       name: 'stg'
       url: 'https://demo-app-react-staging.azurewebsites.net/'
