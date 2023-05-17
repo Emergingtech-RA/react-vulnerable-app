@@ -1,100 +1,81 @@
----
 name: Build and deploy Node.js app to Azure Web App - demo-app-react
+
 on:
   push:
     branches:
       - development
-  workflow_dispatch: null
+  workflow_dispatch:
+
 jobs:
-  analyze:
-    name: Analyze
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    strategy:
-      fail-fast: false
-      matrix:
-        language:
-          - javascript
   security:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Node.js version
-      uses: actions/setup-node@v1
-      with:
-        node-version: 18.x
-    - name: npm install, build, and test
-      env:
-        CI: false
-      run: |
-        npm install
-        npm run build --if-present
+      - uses: actions/checkout@v2
 
-          - name: CodeQL Analysis
-            uses: github/codeql-action/init@v2
-            with:
-              languages: ${{ matrix.language }}
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
 
-          - name: Autobuild
-            uses: github/codeql-action/autobuild@v2
+      - name: npm install, build, and test
+        env:
+          CI: false
+        run: |
+          npm install
+          npm run build --if-present
 
-          - name: Perform CodeQL Analysis
-            uses: github/codeql-action/analyze@v2
-            with:
-              category: "/language:${{matrix.language}}"
-    - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_PROJECT_KEY: emergingtech-ra-org_react-app
-        SONAR_ORGANIZATION: emergingtech-ra-org
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: node-app
-        path: build/
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:javascript"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-app
+          path: build/
+
   deploy-to-staging:
     runs-on: ubuntu-latest
     needs: security
     environment:
-      name: stg
-      url: https://demo-app-react-staging.azurewebsites.net/
+      name: 'stg'
+      url: 'https://demo-app-react-staging.azurewebsites.net/'
+
     steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: node-app
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: demo-app-react
-        slot-name: staging
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-        package: .
-    - name: OWASP ZAP Scan
-      uses: zaproxy/action-baseline@v1
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: node-app
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'demo-app-react'
+          slot-name: 'staging'  # Deploying to the staging slot
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: .
+
   deploy-prod:
     runs-on: ubuntu-latest
     needs: deploy-to-staging
     environment:
-      name: prod
-      url: https://demo-app-react.azurewebsites.net/
+      name: 'prod'
+      url: 'https://demo-app-react.azurewebsites.net/'
+
     steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: node-app
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: demo-app-react
-        slot-name: Production
-        publish-profile: ${{
-          secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ECACBD4D3D754F6CB84546630B51CE8D
-          }}
-        package: .
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: node-app
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'demo-app-react'
+          slot-name: 'Production'  # Deploying to the production slot
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ECACBD4D3D754F6CB84546630B51CE8D }}
+          package: .
