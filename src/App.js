@@ -51,11 +51,11 @@ class App extends Component {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
-              <Link className="navbar-brand" to="/movies">DevSecOps for Banks </Link>
+              <Link className="navbar-brand" to="/home">DevSecOps for Banks </Link>
             </div>
             <ul className="nav navbar-nav">
               <li>
-                <MyLink to="/movies" >Movies</MyLink>
+                <MyLink to="/home" >Home</MyLink>
               </li>
               <li>
                 <MyLink to="/register" rendered={!this.state.loggedIn}>Register</MyLink>

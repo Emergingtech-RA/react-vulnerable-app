@@ -65,10 +65,7 @@ class Login extends Component {
           <input type="password" className="form-control" id="pwd" placeholder="Enter password" name="password"/>
         </div>
         <button type="submit" className="btn btn-default">Submit</button>
-        <div>
-        <input type="Test Data" className="form-control" id="test" placeholder="Type here" name="testdata"/>
-        <button type="Enter" className="btn btn-default">Enter</button>
-        </div>
+        
       </form>
 
     );
