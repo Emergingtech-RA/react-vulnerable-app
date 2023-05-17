@@ -53,6 +53,7 @@ jobs:
         with:
           organization: emergingtech-ra-org
           projectKey: emergingtech-ra-org_react-app
+          args: -X
 
   build:
     name: Build and Test
