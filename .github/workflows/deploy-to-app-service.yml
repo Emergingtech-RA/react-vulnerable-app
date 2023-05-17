@@ -25,26 +25,33 @@ jobs:
           npm install
           npm run build --if-present
 
-#       - name: Perform CodeQL Analysis
-#         uses: github/codeql-action/analyze@v2
-#         with:
-#           category: "/language:javascript"
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
+      
       - name: Autobuild
         uses: github/codeql-action/autobuild@v2
+      
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
-          category: "/language:${{matrix.language}}"
+          category: "/language:${{ matrix.language }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
           path: build/
+
+      - name: SonarQube Scanner
+        uses: SonarSource/sonarqube-scan-action@v1
+        with:
+          sonar-host-url: 'https://sonarcloud.io/'
+          sonar-login: ${{ secrets.SONAR_TOKEN }}
+          project-key: 'emergingtech-ra-org_react-app'
+          project-name: 'emergingtech-ra-org'
+          #project-version: '1.0'
 
   deploy-to-staging:
     runs-on: ubuntu-latest
