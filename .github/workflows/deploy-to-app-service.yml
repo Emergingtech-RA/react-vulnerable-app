@@ -153,3 +153,4 @@ jobs:
           slot-name: Production  # Deploying to the production slot
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1E838A3F79A64905A7213698F16287F4 }}
           package: .
+#test
