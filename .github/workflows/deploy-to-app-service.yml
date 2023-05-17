@@ -49,41 +49,7 @@ jobs:
             -Dsonar.organization=emergingtech-ra-org
             -Dsonar.projectKey=emergingtech-ra-org_react-app
             
-      - name: Synk security scanning
-        uses: actions/checkout@v3
-       
-      - name: Set up Snyk CLI to check for security issues
-        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
-        env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Snyk Code test
-        run: snyk code test --sarif > snyk-code.sarif # || true
-
-      - name: Snyk Open Source monitor
-        run: snyk monitor --all-projects
-      - name: Comment on Scan Results
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { owner, repo } = context.repo;
-            const runId = context.runId;
-
-            const synkResultsUrl = `https://github.com/${owner}/${repo}/runs/${runId}?check_suite_focus=true&check_suite_id=${runId}`;
-            const sonarQubeUrl = `https://sonarcloud.io/dashboard?id=${owner}_${repo}`;
-
-            const comment = `
-            :white_check_mark: Synk Results: [View Results](${synkResultsUrl})
-            :white_check_mark: SonarQube Analysis: [View Results](${sonarQubeUrl})
-            `;
-
-            github.repos.createCommitComment({
-              owner: owner,
-              repo: repo,
-              commit_sha: context.sha,
-              body: comment
-            });
+     
 
 
 
