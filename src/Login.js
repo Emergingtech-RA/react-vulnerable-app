@@ -64,6 +64,10 @@ class Login extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" className="form-control" id="pwd" placeholder="Enter password" name="password"/>
         </div>
+        <div className="form-group">
+          <label htmlFor="ic number">IC Number</label>
+          <input type="ic number" className="form-control" id="pwd" placeholder="Enter IC-Number" name="password"/>
+        </div>
         <button type="submit" className="btn btn-default">Submit</button>
         
       </form>
