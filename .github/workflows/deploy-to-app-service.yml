@@ -48,10 +48,7 @@ jobs:
           args: >
             -Dsonar.organization=emergingtech-ra-org
             -Dsonar.projectKey=emergingtech-ra-org_react-app
-            
-     
-
-
+  
 
   build:
     name: Build and Test
@@ -86,7 +83,7 @@ jobs:
     needs: build
     environment:
       name: 'stg'
-      url: 'https://demo-app-react-staging.azurewebsites.net/'
+      url: 'https://demo-web-app-new-stg.azurewebsites.net/'
 
     steps:
       - name: Download artifact from build job
@@ -97,9 +94,9 @@ jobs:
       - name: Deploy to Azure Web App (Staging)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'demo-app-react'
+          app-name: 'demo-web-app-new'
           slot-name: 'staging'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_367050F7E38542E2A62058FB3E35190B}}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACB8995652B54D829A85DB8278B4ED4F }}
   zap_scan_DAST:
     runs-on: ubuntu-latest
     needs: deploy-to-staging
@@ -114,7 +111,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          target: 'https://demo-app-react-staging.azurewebsites.net'
+          target: 'https://demo-web-app-new-stg.azurewebsites.net/'
           cmd_options: '-a'
   assess-policy-compliance:    
       runs-on: ubuntu-latest
@@ -138,7 +135,7 @@ jobs:
     needs: [zap_scan_DAST, deploy-to-staging]
     environment:
       name: 'prod'
-      url: 'https://demo-app-react.azurewebsites.net/'
+      url: 'https://demo-web-app-new.azurewebsites.net/'
 
     steps:
       - name: Download artifact from build job
@@ -149,8 +146,7 @@ jobs:
       - name: Deploy to Azure Web App (Production)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'demo-app-react'
+          app-name: 'demo-web-app-new'
           slot-name: Production  # Deploying to the production slot
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1E838A3F79A64905A7213698F16287F4 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_14a73bf9a07f4ad0846ca270bd0a6b27 }}
           package: .
-#test
