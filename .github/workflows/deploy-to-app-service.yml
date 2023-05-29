@@ -103,7 +103,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'demo-web-app-new'
-          slot-name: 'staging'
+          slot-name: 'stg'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ACB8995652B54D829A85DB8278B4ED4F }}
   zap_scan_DAST:
     runs-on: ubuntu-latest
@@ -157,5 +157,5 @@ jobs:
         with:
           app-name: 'demo-web-app-new'
           slot-name: Production  # Deploying to the production slot
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_14a73bf9a07f4ad0846ca270bd0a6b27 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_d8e0df18b2004719abfc5cda779b11f6 }}
           package: .
